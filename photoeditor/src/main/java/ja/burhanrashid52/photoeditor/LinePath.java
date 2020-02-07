@@ -3,7 +3,7 @@ package ja.burhanrashid52.photoeditor;
 import android.graphics.Paint;
 import android.graphics.Path;
 
-class LinePath {
+public class LinePath {
     private final Paint mDrawPaint;
     private final Path mDrawPath;
 
