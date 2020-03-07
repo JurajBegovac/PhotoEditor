@@ -8,7 +8,6 @@ import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.util.Log;
-import android.util.Pair;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -971,8 +970,8 @@ public class PhotoEditor implements BrushViewChangeListener {
 		return brushDrawingView.getDrawingPath().first;
 	}
 
-	public List<Pair<FrameLayout, TextView>> getAddedTextViewsWithBackgrounds() {
-		List<Pair<FrameLayout, TextView>> retList = new ArrayList<>();
+	public List<TextInputViews> getAddedTextViewsWithBackgrounds() {
+		List<TextInputViews> retList = new ArrayList<>();
 		for (View addedView : addedViews) {
 			TextView textView = addedView.findViewById(R.id.tvPhotoEditorText);
 			if (textView == null) {
@@ -982,8 +981,32 @@ public class PhotoEditor implements BrushViewChangeListener {
 			if (background == null) {
 				continue;
 			}
-			retList.add(Pair.create(background, textView));
+			retList.add(new TextInputViews(addedView, background, textView,
+					addedView.findViewById(R.id.imgPhotoEditorClose)));
 		}
 		return retList;
+	}
+
+	public static class TextInputViews {
+
+		@NonNull
+		public View rootView;
+
+		@NonNull
+		public View border;
+
+		@NonNull
+		public TextView textInput;
+
+		@Nullable
+		public View closeButton;
+
+		public TextInputViews(@NonNull View rootView, @NonNull View border,
+				@NonNull TextView textInput, @Nullable View closeButton) {
+			this.rootView = rootView;
+			this.border = border;
+			this.textInput = textInput;
+			this.closeButton = closeButton;
+		}
 	}
 }
