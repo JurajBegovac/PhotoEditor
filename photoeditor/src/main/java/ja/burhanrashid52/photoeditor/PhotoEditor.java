@@ -8,6 +8,7 @@ import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.Pair;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -968,5 +969,21 @@ public class PhotoEditor implements BrushViewChangeListener {
 		}
 
 		return brushDrawingView.getDrawingPath().first;
+	}
+
+	public List<Pair<FrameLayout, TextView>> getAddedTextViewsWithBackgrounds() {
+		List<Pair<FrameLayout, TextView>> retList = new ArrayList<>();
+		for (View addedView : addedViews) {
+			TextView textView = addedView.findViewById(R.id.tvPhotoEditorText);
+			if (textView == null) {
+				continue;
+			}
+			FrameLayout background = addedView.findViewById(R.id.frmBorder);
+			if (background == null) {
+				continue;
+			}
+			retList.add(Pair.create(background, textView));
+		}
+		return retList;
 	}
 }
