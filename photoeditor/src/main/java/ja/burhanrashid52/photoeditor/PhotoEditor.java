@@ -1019,7 +1019,7 @@ public class PhotoEditor implements BrushViewChangeListener {
 		public float y;
 
 		@NonNull
-		Bitmap textInputBitmap;
+		public Bitmap textInputBitmap;
 
 		public TextInputResult(float x, float y, @NonNull Bitmap textInputBitmap) {
 			this.x = x;
