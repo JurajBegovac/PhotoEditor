@@ -987,7 +987,51 @@ public class PhotoEditor implements BrushViewChangeListener {
 		return retList;
 	}
 
+	@NonNull
+	public List<TextInputResult> getTextInputResults() {
+		List<TextInputResult> results = new ArrayList<>();
+		clearHelperBox();
+		for (View addedView : addedViews) {
+			TextView textView = addedView.findViewById(R.id.tvPhotoEditorText);
+			if (textView == null) {
+				continue;
+			}
+			addedView.setDrawingCacheEnabled(true);
+			results.add(new TextInputResult(addedView.getX() - parentView.getSource().getX(),
+					addedView.getY() - parentView.getSource().getY(), addedView.getDrawingCache()));
+		}
+		return results;
+	}
+
+	/**
+	 *
+	 */
+	public static class TextInputResult {
+
+		/**
+		 * Text input x
+		 */
+		public float x;
+
+		/**
+		 * Text input y
+		 */
+		public float y;
+
+		@NonNull
+		Bitmap textInputBitmap;
+
+		public TextInputResult(float x, float y, @NonNull Bitmap textInputBitmap) {
+			this.x = x;
+			this.y = y;
+			this.textInputBitmap = textInputBitmap;
+		}
+	}
+
 	public static class TextInputViews {
+
+		@NonNull
+		public ViewGroup parentView;
 
 		@NonNull
 		public View rootView;
