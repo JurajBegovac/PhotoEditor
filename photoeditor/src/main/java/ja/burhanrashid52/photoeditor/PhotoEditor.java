@@ -996,9 +996,8 @@ public class PhotoEditor implements BrushViewChangeListener {
 			if (textView == null) {
 				continue;
 			}
-			addedView.setDrawingCacheEnabled(true);
 			results.add(new TextInputResult(addedView.getX() - parentView.getSource().getX(),
-					addedView.getY() - parentView.getSource().getY(), addedView.getDrawingCache()));
+					addedView.getY() - parentView.getSource().getY(), addedView));
 		}
 		return results;
 	}
@@ -1019,12 +1018,12 @@ public class PhotoEditor implements BrushViewChangeListener {
 		public float y;
 
 		@NonNull
-		public Bitmap textInputBitmap;
+		public View textInputView;
 
-		public TextInputResult(float x, float y, @NonNull Bitmap textInputBitmap) {
+		public TextInputResult(float x, float y, @NonNull View textInputView) {
 			this.x = x;
 			this.y = y;
-			this.textInputBitmap = textInputBitmap;
+			this.textInputView = textInputView;
 		}
 	}
 
